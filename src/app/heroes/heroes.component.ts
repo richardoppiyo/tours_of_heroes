@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { HeroService } from '../hero.service';
 import { Hero } from '../hero';
-import { HEROES } from '../mock-heroes';
 
 @Component({
   selector: 'app-heroes',
@@ -9,7 +9,15 @@ import { HEROES } from '../mock-heroes';
 })
 
 export class HeroesComponent {
-  heroes = HEROES ;
+  heroes: Hero[] = [];
+
+  getHeroes = (): void => {
+    this.heroes = this.heroService.getHeroes();
+  }
+
+  ngOnInit(): void {
+    this.getHeroes();
+  }
   
   selectedHero?:Hero; //This is a ternary operator that assign nothing at the begining and a selectged hero when the function is invoke
 
@@ -17,5 +25,6 @@ export class HeroesComponent {
   onSelect = (hero: Hero): void => {
   this.selectedHero = hero;
 }
-}
 
+constructor(private heroService: HeroService) {}
+}
