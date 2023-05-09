@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HEROES } from '../mock-heroes';
-// import { HEROES } from './mock-heroes';
+import { LoggerService } from '../logger.service'
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,10 @@ import { HEROES } from '../mock-heroes';
 
 export class HeroService {
 
-  getHeroes() { return HEROES; }
-  constructor() { }
+  getHeroes() {
+    this.logger.log('Getting heroes ...');
+    return HEROES;
+   }
+
+  constructor(private logger: LoggerService) { }
 }
