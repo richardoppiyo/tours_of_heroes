@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeroService } from '../hero.service';
-import { MessageService } from '../message.service';
 import { Hero } from '../hero';
 
 @Component({
@@ -9,28 +8,18 @@ import { Hero } from '../hero';
   styleUrls: ['./heroes.component.css']
 })
 
-export class HeroesComponent {
-  heroes: Hero[] = [];
 
-  // getHeroes = (): void => {
-  //   this.heroes = this.heroService.getHeroes();
-  // }
-  getHeroes(): void {
-    this.heroService.getHeroes()
-        .subscribe(heroes => this.heroes = heroes);
-  }
+export class HeroesComponent implements OnInit {
+  heroes: Hero[] = [];
 
   ngOnInit(): void {
     this.getHeroes();
   }
-  
-  selectedHero?:Hero; //This is a ternary operator that assign nothing at the begining and a selectged hero when the function is invoke
 
-  //This is an arrow function that gets executed. Pass the hero 
-  onSelect = (hero: Hero): void => {
-  this.selectedHero = hero;
-  this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
-}
+  getHeroes(): void {
+    this.heroService.getHeroes()
+    .subscribe(heroes => this.heroes = heroes);
+  }
 
-constructor(private heroService: HeroService,  private messageService: MessageService) {}
+  constructor(private heroService: HeroService) { }
 }
