@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HeroService } from '../hero.service';
+import { MessageService } from '../message.service';
 import { Hero } from '../hero';
 
 @Component({
@@ -28,7 +29,8 @@ export class HeroesComponent {
   //This is an arrow function that gets executed. Pass the hero 
   onSelect = (hero: Hero): void => {
   this.selectedHero = hero;
+  this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
 }
 
-constructor(private heroService: HeroService) {}
+constructor(private heroService: HeroService,  private messageService: MessageService) {}
 }
